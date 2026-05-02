@@ -1,7 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // fpacs: forzar español antes de que i18next se inicialice (el
+      // settings panel está oculto, no hay forma de cambiar desde UI)
+      try { localStorage.setItem('i18nextLng', 'es'); } catch (e) {}
+    </script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"

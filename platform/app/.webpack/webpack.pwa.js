@@ -200,8 +200,8 @@ module.exports = (env, argv) => {
   if (isProdBuild) {
     mergedConfig.plugins.push(
       new MiniCssExtractPlugin({
-        filename: '[name].bundle.css',
-        chunkFilename: '[id].css',
+        filename: '[name].bundle.[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
       })
     );
   }

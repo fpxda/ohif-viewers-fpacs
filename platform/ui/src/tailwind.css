@@ -105,3 +105,221 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+/* ============================================================
+ * fpacs — overrides mobile-first para OHIF viewer
+ * Rebuild custom, imagen dockerxda/fpacs-ohif.
+ * UX nativa en celulares (<640px) sin tocar desktop.
+ *
+ * Layout mobile:
+ *   - Panels laterales nativos (Studies, Segmentations): hidden
+ *   - Toolbar superior: transformado en DRAWER izquierdo
+ *     (oculto por default; visible con body.fpacs-drawer-open)
+ *   - Hamburger button + backdrop los inyecta el portal wrapper
+ *     (portal/components/OhifFrame.tsx)
+ * ============================================================ */
+
+@media (max-width: 639px) {
+  /* Panels laterales (Studies, Segmentations): colapsar a 0 */
+  .transition-all.duration-300.ease-in-out[style*='max-width'] {
+    max-width: 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+  .flex.flex-row.flex-nowrap > div[class*='transition-all']:first-child,
+  .flex.flex-row.flex-nowrap > div[class*='transition-all']:last-child {
+    display: none !important;
+  }
+
+  /* Toolbar header: convertir en DRAWER lateral izquierdo.
+     Se oculta fuera de pantalla por default; el portal wrapper lo muestra
+     agregando la clase body.fpacs-drawer-open. */
+  .bg-secondary-dark.z-20 {
+    position: fixed !important;
+    top: 0 !important;
+    left: -320px !important;
+    bottom: 0 !important;
+    width: 300px !important;
+    max-width: 90vw !important;
+    height: 100vh !important;
+    padding: 56px 8px 20px 8px !important;
+    overflow-y: auto !important;
+    overflow-x: visible !important;
+    z-index: 40 !important;
+    transition: left 0.25s ease, box-shadow 0.25s ease !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.fpacs-drawer-open .bg-secondary-dark.z-20 {
+    left: 0 !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Ocultar el icono de settings/preferencias del toolbar (derecha).
+     OHIF lo pone como último hijo del container .absolute.right-0 dentro de
+     un div .flex-shrink-0. El separador (border-r) también se oculta. */
+  .bg-secondary-dark.z-20 .absolute.right-0 > .flex-shrink-0,
+  .bg-secondary-dark.z-20 .absolute.right-0 > .border-primary-dark.mx-1\.5 {
+    display: none !important;
+  }
+
+  /* Logo OHIF (back chevron + texto "Open Health Imaging Foundation"):
+     nuestro portal ya tiene un back button propio. El data-cy
+     "return-to-work-list" lleva al study list interno de OHIF que no
+     usamos (el user vuelve via /medico/estudios). */
+  [data-cy='return-to-work-list'] {
+    display: none !important;
+  }
+
+  /* Layout picker: ocultar la columna "Custom" (hover-grid) a la derecha,
+     dejar solo la lista vertical de presets (MPR, 3D four up, etc.).
+     El marcador es el border-l-2 — es la sub-columna con separador. */
+  .tooltip-box .bg-primary-dark.border-l-2 {
+    display: none !important;
+  }
+
+  /* MoreTools dropdown (Reset View, Girar, Flip, Scroll, Cine...):
+     OHIF lo renderiza absolute posicionado por su parent. Lo reposicionamos
+     dentro del viewport y ensanchamos para que los labels se vean. */
+  .tooltip-box {
+    max-width: 90vw !important;
+  }
+  body.fpacs-drawer-open .tooltip {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    max-width: 90vw !important;
+  }
+
+  /* MoreTools popup: es un .absolute.z-10.top-0.mt-12 que queda cortado.
+     Lo reposicionamos respecto al viewport entero (no su parent). */
+  body.fpacs-drawer-open .bg-secondary-dark .absolute.z-10.top-0.mt-12 {
+    position: fixed !important;
+    left: 8px !important;
+    right: 8px !important;
+    top: 100px !important;
+    margin-top: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+    z-index: 55 !important;
+  }
+
+  /* Dentro del MoreTools popup, los items deben mostrarse completos */
+  body.fpacs-drawer-open .bg-secondary-dark .absolute.z-10.top-0.mt-12 > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  body.fpacs-drawer-open .bg-secondary-dark .absolute.z-10.top-0.mt-12 .mr-5 {
+    white-space: normal !important;
+    margin-right: 0 !important;
+  }
+
+  /* Popovers y sub-menús: permitir que escapen del drawer hacia la derecha
+     sobre el viewport (en vez de recortarse dentro del drawer) */
+  .bg-secondary-dark.z-20 {
+    overflow-y: auto !important;
+    overflow-x: visible !important;
+  }
+  /* Los popovers usan posición absolute con z-index. Los liftamos al
+     tope para que queden sobre el backdrop + se vean completos */
+  body.fpacs-drawer-open [role='dialog'],
+  body.fpacs-drawer-open [data-radix-popper-content-wrapper],
+  body.fpacs-drawer-open div[role='menu'],
+  body.fpacs-drawer-open [class*='Popover'],
+  body.fpacs-drawer-open [class*='popover'] {
+    z-index: 50 !important;
+  }
+  /* El tooltip popup de Layout (que aparece al hacer click en el tool) se
+     renderiza absolute con offset negativo. En mobile lo forzamos a caber
+     horizontalmente usando max-width del viewport */
+  .bg-secondary-dark.z-20 [data-state='open'],
+  .bg-secondary-dark.z-20 .absolute[style*='translate'] {
+    max-width: 86vw !important;
+  }
+
+  /* Inner container del toolbar: stack vertical en mobile */
+  .bg-secondary-dark.z-20 > div:first-child,
+  .bg-secondary-dark.z-20 > div.relative.h-\[48px\] {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  /* Las 3 secciones absolutas (logo | tools | settings) pasan a ser
+     items del flex column */
+  .bg-secondary-dark.z-20 > div > div.absolute {
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  /* Fila de tools (hoy en .flex.items-center.space-x-2): que se
+     renderice horizontal con wrap */
+  .bg-secondary-dark.z-20 .flex.items-center.justify-center.space-x-2,
+  .bg-secondary-dark.z-20 .flex.justify-center.gap-\[4px\] {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* Touch targets >= 44px (WCAG 2.5.5 AAA) */
+  .bg-secondary-dark.z-20 button {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Logo OHIF: más chico en el drawer */
+  .bg-secondary-dark.z-20 .ml-1 {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Backdrop (semi-transparente detrás del drawer) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 35;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  body.fpacs-drawer-open::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Tooltips hover-hint: ocultos en mobile (sticky en touch devices).
+     Marcados con la clase fpacs-hide-hover-tooltip por JS (OhifFrame) que
+     los distingue de los dropdowns Layout/MoreTools que usan la misma
+     base CSS pero tienen contenido más grande (lista de items). */
+  .fpacs-hide-hover-tooltip {
+    display: none !important;
+  }
+
+  /* Overlay viewport más chico (W/L, slice counter) */
+  .viewport-overlay {
+    font-size: 10px !important;
+  }
+
+  /* Viewport ocupa toda la pantalla (el toolbar está fuera del flow) */
+  .flex.flex-row.flex-nowrap {
+    height: 100vh !important;
+  }
+}

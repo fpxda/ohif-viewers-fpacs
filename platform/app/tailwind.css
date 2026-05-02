@@ -6,3 +6,65 @@
 * {
   min-height: 0 !important;
 }
+
+/* ============================================================
+ * fpacs — overrides mobile-first para OHIF viewer
+ * Rebuild custom en WSL, imagen dockerxda/fpacs-ohif.
+ * Objetivo: UX nativa en celulares (<640px) sin tocar desktop.
+ * ============================================================ */
+
+@media (max-width: 639px) {
+  /* Panels laterales: colapsar a 0 para que la imagen tenga todo el ancho */
+  .transition-all.duration-300.ease-in-out[style*='max-width'] {
+    max-width: 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+  .flex.flex-row.flex-nowrap > div[class*='transition-all']:first-child,
+  .flex.flex-row.flex-nowrap > div[class*='transition-all']:last-child {
+    display: none !important;
+  }
+
+  /* Header superior (toolbar): permitir scroll horizontal si no entra */
+  header,
+  .bg-secondary-dark {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  header::-webkit-scrollbar,
+  .bg-secondary-dark::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Touch targets >= 44px en toolbar (WCAG 2.5.5) */
+  header button,
+  .bg-secondary-dark button {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Logo OHIF (izquierda): ocultar texto, dejar solo icono compacto */
+  header > div:first-child > div:first-child > div.mr-3 > div.ml-1 {
+    display: none !important;
+  }
+
+  /* "Patient" badge a la derecha: ocultar texto largo, dejar icono */
+  header > div:last-child span {
+    display: none !important;
+  }
+
+  /* Tooltips no fullscreen en mobile — evitar que bloqueen el viewport */
+  .tooltip-box {
+    max-width: 70vw !important;
+  }
+
+  /* Texto superpuesto a la imagen (patient info overlay): más chico */
+  .viewport-overlay {
+    font-size: 10px !important;
+  }
+}
