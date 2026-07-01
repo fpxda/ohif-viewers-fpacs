@@ -1,0 +1,16 @@
+{
+  "Display Set Messages": "Mensajes del conjunto de imágenes",
+  "1": "No se encontraron instancias válidas en la serie.",
+  "2": "Al conjunto de imágenes le falta información de posición.",
+  "3": "El conjunto de imágenes no es un volumen 3D reconstruible.",
+  "4": "Los conjuntos multiframe no tienen información de medición de píxeles.",
+  "5": "Los conjuntos multiframe no tienen información de orientación.",
+  "6": "Los conjuntos multiframe no tienen información de posición.",
+  "7": "Al conjunto de imágenes le faltan fotogramas.",
+  "8": "El conjunto de imágenes tiene espaciado irregular.",
+  "9": "El conjunto de imágenes tiene dimensiones inconsistentes entre fotogramas.",
+  "10": "El conjunto de imágenes tiene fotogramas con distinta cantidad de componentes.",
+  "11": "El conjunto de imágenes tiene fotogramas con orientaciones inconsistentes.",
+  "12": "El conjunto de imágenes tiene información de posición inconsistente.",
+  "13": "Conjunto de imágenes no soportado."
+}
