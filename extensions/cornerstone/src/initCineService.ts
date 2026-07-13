@@ -1,4 +1,4 @@
-import { cache, Types } from '@cornerstonejs/core';
+import { cache, getEnabledElement, BaseVolumeViewport, Types } from '@cornerstonejs/core';
 import { utilities } from '@cornerstonejs/tools';
 
 function _getVolumeFromViewport(viewport: Types.IBaseVolumeViewport) {
@@ -53,7 +53,18 @@ function initCineService(servicesManager: AppTypes.ServicesManager) {
   };
 
   const playClip = (element, playClipOptions) => {
-    return utilities.cine.playClip(element, playClipOptions);
+    // FIX (fpacs): el playClip de cornerstone3D defaultea `dynamicCineEnabled` a true y,
+    // cuando es truthy, llama `viewport.getAllVolumeIds()` SIN chequear el tipo de viewport.
+    // Ese metodo solo existe en viewports de volumen; los multiframe (ecografias US y demas
+    // cine de stack) usan un StackViewport -> `getAllVolumeIds is not a function` -> crashea
+    // el visor al darle play. Solo habilitamos el cine dinamico para viewports de volumen.
+    const enabledElement = getEnabledElement(element);
+    const isVolumeViewport = enabledElement?.viewport instanceof BaseVolumeViewport;
+    const options = {
+      ...playClipOptions,
+      dynamicCineEnabled: isVolumeViewport ? playClipOptions?.dynamicCineEnabled : false,
+    };
+    return utilities.cine.playClip(element, options);
   };
 
   const stopClip = (element, stopClipOptions) => {
