@@ -145,7 +145,7 @@ const SplitButton = ({
             >
               <Tooltip
                 isDisabled={state.isExpanded || !secondary.tooltip}
-                content={secondary.tooltip}
+                content={secondary.tooltip ? t(secondary.tooltip) : secondary.tooltip}
                 className="h-full"
               >
                 <Icon

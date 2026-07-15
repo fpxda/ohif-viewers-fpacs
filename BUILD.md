@@ -62,7 +62,28 @@ proxy `/api/pacs` del portal via `window.location.origin`. Al deployar sólo cam
 
 El `es` de OHIF 3.9.0 viene incompleto. Traducciones propias en
 `platform/i18n/src/locales/es/` (namespaces nuevos se registran en `es/index.js`).
-OJO: el grueso del toolbar del viewer tiene labels **hardcodeados en las extensiones**
-(no son claves i18n) → traducir `locales/es` NO los cambia; sólo menús, mensajes y
-las pocas claves i18n del toolbar. El idioma lo fuerza el portal con `&lng=es` en la
-URL (querystring-first detector de i18next).
+El idioma lo fuerza el portal con `&lng=es` en la URL (querystring-first detector
+de i18next).
+
+Desde 2026-07-15 los labels "hardcodeados" del toolbar/menús SÍ pasan por i18n:
+se parcharon los componentes para que traduzcan con el namespace que corresponde
+(`ToolbarButton`/`SplitButton` → `Buttons`, `ContextMenu` → `ContextMenu`,
+selector de layout → `LayoutSelector`, menú W/L → `WindowLevelActionMenu`, y los
+prompts de tracking/diálogos usan `i18n.t()` directo). Regla práctica: si aparece
+un texto en inglés en el viewer, la clave es el TEXTO EXACTO en inglés → agregarla
+al JSON del namespace correcto en `locales/es/` y rebuildear. Los pocos textos
+sin capa i18n (p. ej. "Cargando…" de los loaders) están traducidos directo en el
+componente.
+
+## Tools custom de fpacs (además del cine fix)
+
+- `extensions/cornerstone/src/tools/PlainLineTool.ts` — herramienta **Línea**:
+  línea recta sin caja de medida ni link line (LengthTool con
+  `getLinkedTextBoxStyle → visibility:false`). Registrada en
+  `initCornerstoneTools` + `initMeasurementService` (mapea como Length) +
+  toolgroups del modo longitudinal + botón en el menú de medición.
+- **Ángulo** agregado al menú de medición (ya existía la tool; sólo se sumó el
+  botón en `modes/longitudinal/src/toolbarButtons.ts`; sigue también en
+  "Más herramientas").
+- Ícono nuevo `tool-line` (`platform/ui/src/assets/icons/tool-line.svg`,
+  registrado en `getIcon.js`).

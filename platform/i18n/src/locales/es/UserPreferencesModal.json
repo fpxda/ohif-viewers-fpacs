@@ -1,6 +1,9 @@
 {
   "Cancel": "$t(Buttons:Cancel)",
+  "No hotkeys found": "No hay atajos configurados para esta aplicación. Se configuran en el archivo app-config.js.",
   "Reset to defaults": "$t(Buttons:Reset to defaults)",
+  "ResetDefaultMessage": "Preferencias restauradas a los valores por defecto. <br /> Tenés que <strong>Guardar</strong> para aplicar el cambio.",
   "Save": "$t(Buttons:Save)",
+  "SaveMessage": "Preferencias guardadas",
   "User preferences": "Preferencias de Usuario"
 }

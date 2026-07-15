@@ -84,17 +84,17 @@ function _askSaveDiscardOrCancel(
 ) {
   return new Promise(function (resolve, reject) {
     const message =
-      'Measurements cannot span across multiple studies. Do you want to save your tracked measurements?';
+      i18n.t('MeasurementTable:Measurements cannot span across multiple studies. Do you want to save your tracked measurements?');
     const actions = [
-      { type: 'cancel', text: 'Cancel', value: RESPONSE.CANCEL },
+      { type: 'cancel', text: i18n.t('Common:Cancel'), value: RESPONSE.CANCEL },
       {
         type: 'secondary',
-        text: 'No, discard previously tracked series & measurements',
+        text: i18n.t('MeasurementTable:No, discard previously tracked series & measurements'),
         value: RESPONSE.SET_STUDY_AND_SERIES,
       },
       {
         type: 'primary',
-        text: 'Yes',
+        text: i18n.t('Common:Yes'),
         value: RESPONSE.CREATE_REPORT,
       },
     ];

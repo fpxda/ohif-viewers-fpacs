@@ -1,4 +1,5 @@
 import { hydrateStructuredReport } from '@ohif/extension-cornerstone-dicom-sr';
+import i18n from 'i18next';
 import { ButtonEnums } from '@ohif/ui';
 
 const RESPONSE = {
@@ -47,18 +48,18 @@ function promptHydrateStructuredReport({ servicesManager, extensionManager, appC
 
 function _askTrackMeasurements(uiViewportDialogService, viewportId) {
   return new Promise(function (resolve, reject) {
-    const message = 'Do you want to continue tracking measurements for this study?';
+    const message = i18n.t('MeasurementTable:Do you want to continue tracking measurements for this study?');
     const actions = [
       {
         id: 'no-hydrate',
         type: ButtonEnums.type.secondary,
-        text: 'No',
+        text: i18n.t('Common:No'),
         value: RESPONSE.CANCEL,
       },
       {
         id: 'yes-hydrate',
         type: ButtonEnums.type.primary,
-        text: 'Yes',
+        text: i18n.t('Common:Yes'),
         value: RESPONSE.HYDRATE_REPORT,
       },
     ];

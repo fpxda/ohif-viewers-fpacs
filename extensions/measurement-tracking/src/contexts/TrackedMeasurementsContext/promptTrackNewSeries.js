@@ -1,4 +1,5 @@
 import { ButtonEnums } from '@ohif/ui';
+import i18n from 'i18next';
 
 const RESPONSE = {
   NO_NEVER: -1,
@@ -36,21 +37,21 @@ function promptTrackNewSeries({ servicesManager, extensionManager }, ctx, evt) {
 
 function _askShouldAddMeasurements(uiViewportDialogService, viewportId) {
   return new Promise(function (resolve, reject) {
-    const message = 'Do you want to add this measurement to the existing report?';
+    const message = i18n.t('MeasurementTable:Do you want to add this measurement to the existing report?');
     const actions = [
       {
         type: ButtonEnums.type.secondary,
-        text: 'Cancel',
+        text: i18n.t('Common:Cancel'),
         value: RESPONSE.CANCEL,
       },
       {
         type: ButtonEnums.type.primary,
-        text: 'Create new report',
+        text: i18n.t('MeasurementTable:Create new report'),
         value: RESPONSE.CREATE_REPORT,
       },
       {
         type: ButtonEnums.type.primary,
-        text: 'Add to existing report',
+        text: i18n.t('MeasurementTable:Add to existing report'),
         value: RESPONSE.ADD_SERIES,
       },
     ];
@@ -76,17 +77,17 @@ function _askShouldAddMeasurements(uiViewportDialogService, viewportId) {
 function _askSaveDiscardOrCancel(UIViewportDialogService, viewportId) {
   return new Promise(function (resolve, reject) {
     const message =
-      'You have existing tracked measurements. What would you like to do with your existing tracked measurements?';
+      i18n.t('MeasurementTable:You have existing tracked measurements. What would you like to do with your existing tracked measurements?');
     const actions = [
-      { type: 'cancel', text: 'Cancel', value: RESPONSE.CANCEL },
+      { type: 'cancel', text: i18n.t('Common:Cancel'), value: RESPONSE.CANCEL },
       {
         type: 'secondary',
-        text: 'Save',
+        text: i18n.t('Buttons:Save'),
         value: RESPONSE.CREATE_REPORT,
       },
       {
         type: 'primary',
-        text: 'Discard',
+        text: i18n.t('MeasurementTable:Discard'),
         value: RESPONSE.SET_STUDY_AND_SERIES,
       },
     ];

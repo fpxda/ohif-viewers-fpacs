@@ -1,0 +1,6 @@
+{
+  "Field can't be empty": "El campo no puede estar vacío",
+  "Hotkey is already in use": "El atajo ya está en uso",
+  "It's not possible to define only modifier keys (ctrl, alt and shift) as a shortcut": "No se puede definir un atajo solo con teclas modificadoras (ctrl, alt y shift)",
+  "Shortcut combination is not allowed": "Esa combinación de teclas no está permitida"
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import PropTypes from 'prop-types';
 import { utils } from '@ohif/core';
 import { useImageViewer, useViewportGrid, Dialog, ButtonEnums } from '@ohif/ui';
@@ -437,24 +438,24 @@ function PanelStudyBrowserTracking({
       showOverlay: true,
       content: Dialog,
       contentProps: {
-        title: 'Untrack Series',
+        title: t('MeasurementTable:Untrack Series'),
         body: () => (
           <div className="bg-primary-dark p-4 text-white">
-            <p>Are you sure you want to untrack this series?</p>
+            <p>{t('MeasurementTable:Are you sure you want to untrack this series?')}</p>
             <p className="mt-2">
-              This action cannot be undone and will delete all your existing measurements.
+              {t('MeasurementTable:This action cannot be undone and will delete all your existing measurements.')}
             </p>
           </div>
         ),
         actions: [
           {
             id: 'cancel',
-            text: 'Cancel',
+            text: t('Common:Cancel'),
             type: ButtonEnums.type.secondary,
           },
           {
             id: 'yes',
-            text: 'Yes',
+            text: t('Common:Yes'),
             type: ButtonEnums.type.primary,
             classes: ['untrack-yes-button'],
           },
@@ -625,22 +626,22 @@ function _mapDisplaySets(
               showOverlay: true,
               content: Dialog,
               contentProps: {
-                title: 'Delete Report',
+                title: i18n.t('MeasurementTable:Delete Report'),
                 body: () => (
                   <div className="bg-primary-dark p-4 text-white">
-                    <p>Are you sure you want to delete this report?</p>
-                    <p className="mt-2">This action cannot be undone.</p>
+                    <p>{i18n.t('MeasurementTable:Are you sure you want to delete this report?')}</p>
+                    <p className="mt-2">{i18n.t('MeasurementTable:This action cannot be undone.')}</p>
                   </div>
                 ),
                 actions: [
                   {
                     id: 'cancel',
-                    text: 'Cancel',
+                    text: i18n.t('Common:Cancel'),
                     type: ButtonEnums.type.secondary,
                   },
                   {
                     id: 'yes',
-                    text: 'Yes',
+                    text: i18n.t('Common:Yes'),
                     type: ButtonEnums.type.primary,
                     classes: ['reject-yes-button'],
                   },
@@ -659,15 +660,15 @@ function _mapDisplaySets(
                         displaySetService.deleteDisplaySet(displaySetInstanceUID);
                         uiDialogService.dismiss({ id: 'ds-reject-sr' });
                         uiNotificationService.show({
-                          title: 'Delete Report',
-                          message: 'Report deleted successfully',
+                          title: i18n.t('MeasurementTable:Delete Report'),
+                          message: i18n.t('MeasurementTable:Report deleted successfully'),
                           type: 'success',
                         });
                       } catch (error) {
                         uiDialogService.dismiss({ id: 'ds-reject-sr' });
                         uiNotificationService.show({
-                          title: 'Delete Report',
-                          message: 'Failed to delete report',
+                          title: i18n.t('MeasurementTable:Delete Report'),
+                          message: i18n.t('MeasurementTable:Failed to delete report'),
                           type: 'error',
                         });
                       }

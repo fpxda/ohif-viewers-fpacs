@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import IconButton from '../IconButton';
 import Icon from '../Icon';
@@ -23,8 +24,12 @@ const ToolbarButton = ({
   ...rest
   //
 }) => {
+  // fpacs: las labels del toolbar vienen hardcodeadas en inglés desde los modes;
+  // acá las pasamos por i18n (namespace Buttons) para que el tooltip salga traducido
+  const { t } = useTranslation('Buttons');
+  const translatedLabel = label ? t(label) : label;
   const shouldShowDropdown = !!dropdownContent;
-  const iconEl = icon ? <Icon name={icon} /> : <div>{label || 'Missing icon and label'}</div>;
+  const iconEl = icon ? <Icon name={icon} /> : <div>{translatedLabel || 'Missing icon and label'}</div>;
 
   const sizeToUse = size ?? 'toolbar';
   const toolTipClassNameToUse =
@@ -38,8 +43,8 @@ const ToolbarButton = ({
     <div key={id}>
       <Tooltip
         isSticky={shouldShowDropdown}
-        content={shouldShowDropdown ? dropdownContent : label}
-        secondaryContent={disabled ? disabledText : null}
+        content={shouldShowDropdown ? dropdownContent : translatedLabel}
+        secondaryContent={disabled && disabledText ? t(disabledText) : null}
         tight={shouldShowDropdown}
         className={toolTipClassNameToUse}
         isDisabled={disableToolTip}

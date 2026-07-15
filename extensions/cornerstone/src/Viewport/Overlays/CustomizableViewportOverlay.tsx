@@ -49,7 +49,7 @@ const studyDateItem = {
   id: 'StudyDate',
   customizationType: 'ohif.overlayItem',
   label: '',
-  title: 'Study date',
+  title: 'Fecha del estudio',
   condition: ({ referenceInstance }) => referenceInstance?.StudyDate,
   contentF: ({ referenceInstance, formatters: { formatDate } }) =>
     formatDate(referenceInstance.StudyDate),
@@ -59,7 +59,7 @@ const seriesDescriptionItem = {
   id: 'SeriesDescription',
   customizationType: 'ohif.overlayItem',
   label: '',
-  title: 'Series description',
+  title: 'Descripción de la serie',
   condition: ({ referenceInstance }) => {
     return referenceInstance && referenceInstance.SeriesDescription;
   },

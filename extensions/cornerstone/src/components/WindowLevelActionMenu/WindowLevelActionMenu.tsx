@@ -141,7 +141,7 @@ export function WindowLevelActionMenu({
         {colormaps && !is3DVolume && (
           <AllInOneMenu.SubMenu
             key="colorLUTPresets"
-            itemLabel="Color LUT"
+            itemLabel={t('Color LUT')}
             itemIcon="icon-color-lut"
           >
             <Colormap
@@ -178,7 +178,7 @@ export function WindowLevelActionMenu({
         )}
 
         {volumeRenderingQualityRange && is3DVolume && (
-          <AllInOneMenu.SubMenu itemLabel="Rendering Options">
+          <AllInOneMenu.SubMenu itemLabel={t('Rendering Options')}>
             <VolumeRenderingOptions
               viewportId={viewportId}
               commandsManager={commandsManager}

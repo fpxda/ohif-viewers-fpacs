@@ -43,7 +43,9 @@ export function WindowLevel({
               {presetsArray.map((preset, index) => (
                 <AllInOneMenu.Item
                   key={`${modality}-${index}`}
-                  label={preset.description}
+                  // fpacs: las descripciones de los presets ("Soft tissue", "Lung"…)
+                  // vienen hardcodeadas de la config → las pasamos por i18n
+                  label={preset.description ? t(preset.description) : preset.description}
                   secondaryLabel={`${preset.window} / ${preset.level}`}
                   onClick={() => onSetWindowLevel(preset)}
                 />

@@ -1,4 +1,5 @@
 import { LengthTool, utilities } from '@cornerstonejs/tools';
+import i18n from 'i18next';
 import { callInputDialog } from '@ohif/extension-default';
 import getActiveViewportEnabledElement from '../utils/getActiveViewportEnabledElement';
 
@@ -100,8 +101,8 @@ export function onCompletedCalibrationLine(
       },
       false,
       {
-        dialogTitle: 'Calibration',
-        inputLabel: 'Actual Physical distance (mm)',
+        dialogTitle: i18n.t('Dialog:Calibration'),
+        inputLabel: i18n.t('Dialog:Actual Physical distance (mm)'),
 
         // the input value must be a number
         validateFunc: val => {

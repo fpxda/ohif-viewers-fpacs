@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { LayoutSelector as OHIFLayoutSelector, ToolbarButton, LayoutPreset } from '@ohif/ui';
 
@@ -162,6 +163,9 @@ function LayoutSelector({
     };
   }, [isOpen]);
 
+  // fpacs: secciones y presets del selector de layout vienen hardcodeados en inglés
+  const { t } = useTranslation('LayoutSelector');
+
   const onInteractionHandler = () => {
     setIsOpen(!isOpen);
   };
@@ -183,7 +187,7 @@ function LayoutSelector({
             ref={dropdownRef}
           >
             <div className="bg-secondary-dark flex flex-col gap-2.5 p-2">
-              <div className="text-aqua-pale text-xs">Common</div>
+              <div className="text-aqua-pale text-xs">{t('Common')}</div>
 
               <div className="flex gap-4">
                 {commonPresets.map((preset, index) => (
@@ -199,7 +203,7 @@ function LayoutSelector({
 
               <div className="h-[2px] bg-black"></div>
 
-              <div className="text-aqua-pale text-xs">Advanced</div>
+              <div className="text-aqua-pale text-xs">{t('Advanced')}</div>
 
               <div className="flex flex-col gap-2.5">
                 {advancedPresets.map((preset, index) => (
@@ -207,7 +211,7 @@ function LayoutSelector({
                     key={index + commonPresets.length}
                     classNames="hover:bg-primary-dark group flex gap-2 p-1 cursor-pointer"
                     icon={preset.icon}
-                    title={preset.title}
+                    title={preset.title ? t(preset.title) : preset.title}
                     disabled={preset.disabled}
                     commandOptions={preset.commandOptions}
                     onSelection={onSelectionPreset}
@@ -217,14 +221,14 @@ function LayoutSelector({
             </div>
 
             <div className="bg-primary-dark flex flex-col gap-2.5 border-l-2 border-solid border-black  p-2">
-              <div className="text-aqua-pale text-xs">Custom</div>
+              <div className="text-aqua-pale text-xs">{t('Custom')}</div>
               <DropdownContent
                 rows={rows}
                 columns={columns}
                 onSelection={onSelection}
               />
               <p className="text-aqua-pale text-xs leading-tight">
-                Hover to select <br></br>rows and columns <br></br> Click to apply
+                {t('Hover to select rows and columns. Click to apply.')}
               </p>
             </div>
           </div>

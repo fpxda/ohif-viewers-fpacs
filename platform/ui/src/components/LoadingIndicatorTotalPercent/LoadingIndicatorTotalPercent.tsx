@@ -18,7 +18,7 @@ function LoadingIndicatorTotalPercent({
   className,
   totalNumbers,
   percentComplete,
-  loadingText = 'Loading...',
+  loadingText = 'Cargando…',
   targetText = 'segments',
 }: Props): JSX.Element {
   const progress = percentComplete;

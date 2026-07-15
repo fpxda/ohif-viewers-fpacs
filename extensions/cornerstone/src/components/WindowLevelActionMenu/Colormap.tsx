@@ -1,4 +1,5 @@
 import React, { ReactElement, useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AllInOneMenu, ButtonGroup, SwitchButton } from '@ohif/ui';
 import { StackViewport, Types } from '@cornerstonejs/core';
 import { ColormapProps } from '../../types/Colormap';
@@ -10,6 +11,7 @@ export function Colormap({
   commandsManager,
   servicesManager,
 }: ColormapProps): ReactElement {
+  const { t } = useTranslation('WindowLevelActionMenu');
   const { cornerstoneViewportService } = servicesManager.services;
 
   const [activeDisplaySet, setActiveDisplaySet] = useState(displaySets[0]);
@@ -112,7 +114,7 @@ export function Colormap({
       )}
       <div className="all-in-one-menu-item flex w-full justify-center">
         <SwitchButton
-          label="Preview in viewport"
+          label={t('Preview in viewport')}
           checked={showPreview}
           onChange={checked => {
             setShowPreview(checked);
@@ -124,7 +126,7 @@ export function Colormap({
         {colormaps.map((colormap, index) => (
           <AllInOneMenu.Item
             key={index}
-            label={colormap.description}
+            label={colormap.description ? t(colormap.description) : colormap.description}
             onClick={() => {
               onSetColorLUT({
                 viewportId,

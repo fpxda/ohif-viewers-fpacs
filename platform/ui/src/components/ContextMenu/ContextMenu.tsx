@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import Typography from '../Typography';
 import Icon from '../Icon';
 
 const ContextMenu = ({ items, ...props }) => {
+  // fpacs: las labels del menú contextual (p. ej. "Delete measurement") vienen
+  // hardcodeadas en inglés desde las customizations; acá pasan por i18n
+  const { t } = useTranslation('ContextMenu');
   if (!items) {
     return null;
   }
@@ -21,7 +25,7 @@ const ContextMenu = ({ items, ...props }) => {
           style={{ justifyContent: 'space-between' }}
           className="hover:bg-primary-dark border-primary-dark flex cursor-pointer items-center border-b px-4 py-3 transition duration-300 last:border-b-0"
         >
-          <Typography>{item.label}</Typography>
+          <Typography>{item.label ? t(item.label) : item.label}</Typography>
           {item.iconRight && (
             <Icon
               name={item.iconRight}

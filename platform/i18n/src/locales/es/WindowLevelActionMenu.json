@@ -1,5 +1,23 @@
 {
   "Back to Display Options": "Volver a opciones de visualización",
+  "Bone": "Hueso",
+  "Brain": "Cerebro",
+  "Color LUT": "Paleta de color (LUT)",
+  "Default": "Por defecto",
+  "Display Color bar": "Mostrar barra de color",
+  "Grayscale": "Escala de grises",
+  "Hot Iron": "Hierro caliente",
+  "Liver": "Hígado",
+  "Lung": "Pulmón",
   "Modality Presets": "Preajustes de {{modality}}",
-  "Modality Window Presets": "Preajustes de ventana de {{modality}}"
+  "Modality Window Presets": "Preajustes de ventana de {{modality}}",
+  "Perfusion": "Perfusión",
+  "Preview in viewport": "Previsualizar en la ventana",
+  "Rainbow": "Arcoíris",
+  "Red Hot": "Rojo intenso",
+  "Rendering Options": "Opciones de renderizado",
+  "Rendering Presets": "Preajustes de renderizado",
+  "Soft tissue": "Tejidos blandos",
+  "SUV": "SUV",
+  "X Ray": "Rayos X"
 }

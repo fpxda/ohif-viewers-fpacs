@@ -81,6 +81,7 @@ function initDefaultToolGroup(
       { toolName: toolNames.CobbAngle },
       { toolName: toolNames.Magnify },
       { toolName: toolNames.CalibrationLine },
+      { toolName: toolNames.PlainLine }, // fpacs: línea recta sin medida visible
       {
         toolName: toolNames.PlanarFreehandContourSegmentation,
         configuration: {
@@ -242,6 +243,7 @@ function initMPRToolGroup(extensionManager, toolGroupService, commandsManager, m
       { toolName: toolNames.StackScroll },
       { toolName: toolNames.Angle },
       { toolName: toolNames.CobbAngle },
+      { toolName: toolNames.PlainLine }, // fpacs: línea recta sin medida visible
       { toolName: toolNames.PlanarFreehandROI },
       { toolName: toolNames.WindowLevelRegion },
       {

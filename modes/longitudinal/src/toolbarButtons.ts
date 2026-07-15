@@ -81,6 +81,24 @@ const toolbarButtons: Button[] = [
           commands: setToolActiveToolbar,
           evaluate: 'evaluate.cornerstoneTool',
         }),
+        // fpacs: Angle también acá (además de "Más herramientas") — pedido del dueño 2026-07-15
+        createButton({
+          id: 'Angle',
+          icon: 'tool-angle',
+          label: 'Angle',
+          tooltip: 'Angle',
+          commands: setToolActiveToolbar,
+          evaluate: 'evaluate.cornerstoneTool',
+        }),
+        // fpacs: línea recta simple (sin texto de medida ni línea de enlace) — tool custom PlainLine
+        createButton({
+          id: 'PlainLine',
+          icon: 'tool-line',
+          label: 'Line',
+          tooltip: 'Line',
+          commands: setToolActiveToolbar,
+          evaluate: 'evaluate.cornerstoneTool',
+        }),
         createButton({
           id: 'PlanarFreehandROI',
           icon: 'icon-tool-freehand-roi',

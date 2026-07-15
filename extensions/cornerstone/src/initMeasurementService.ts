@@ -148,6 +148,16 @@ const initMeasurementService = (
     Length.toMeasurement
   );
 
+  // fpacs: PlainLine es una Length sin textBox en pantalla — en el panel de
+  // mediciones se comporta igual que Length (reusa sus mappings)
+  measurementService.addMapping(
+    csTools3DVer1MeasurementSource,
+    'PlainLine',
+    Length.matchingCriteria,
+    Length.toAnnotation,
+    Length.toMeasurement
+  );
+
   measurementService.addMapping(
     csTools3DVer1MeasurementSource,
     'LivewireContour',
