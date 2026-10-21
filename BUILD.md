@@ -96,3 +96,11 @@ componente.
   `disabled`, botón en "Más herramientas" (`moreTools.ts`), ícono `tool-superimpose`.
   El "Image Overlay" original (planos 60xx del equipo) se retradujo a
   "Overlay DICOM del equipo" para que no se confunda con esto.
+- `extensions/cornerstone/src/tools/TaGtTool.ts` + `taGtMath.ts` — **Distancia TA-GT**
+  (2026-10-21, pedido del dueño con el video de Horos). Hereda de `CobbAngleTool`
+  (cuatro clics y edición de puntos) y redefine el cálculo y el dibujo: puntos 1-2 =
+  línea bicondílea posterior, 3 = vértice de la tróclea, 4 = centro de la tuberosidad
+  tibial; dibuja la línea extendida, las dos perpendiculares y "TA-GT xx,x mm" (distancia
+  entre los pies de las perpendiculares, en mm de mundo). Botón en "Más herramientas",
+  pasiva en el toolgroup `default`, ícono `tool-tagt`. No está mapeada al panel de
+  mediciones: el valor se lee sobre la imagen. Se usa con "Superponer corte".

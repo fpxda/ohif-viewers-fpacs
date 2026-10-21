@@ -79,6 +79,7 @@ function initDefaultToolGroup(
       { toolName: toolNames.StackScroll },
       { toolName: toolNames.Angle },
       { toolName: toolNames.CobbAngle },
+      { toolName: toolNames.TaGt }, // fpacs: distancia TA-GT
       { toolName: toolNames.Magnify },
       { toolName: toolNames.CalibrationLine },
       { toolName: toolNames.PlainLine }, // fpacs: línea recta sin medida visible

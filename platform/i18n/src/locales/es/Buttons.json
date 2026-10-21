@@ -79,6 +79,8 @@
   "Themes": "Temas",
   "Toggle Image Overlay": "Mostrar/ocultar las marcas que el equipo embebe en la imagen",
   "Superimpose Slice": "Superponer corte",
+  "TA-GT Distance": "Distancia TA-GT",
+  "TA-GT: posterior condylar line, trochlear groove and tibial tuberosity": "TA-GT: 2 clics en la cara posterior de los cóndilos, 1 en el vértice de la tróclea y 1 en la tuberosidad tibial",
   "Fix the current slice and show it over the others": "Fija el corte actual y lo muestra translúcido sobre los demás (anteversión femoral)",
   "Tool not available for this modality": "Herramienta no disponible para esta modalidad",
   "Ultrasound Directional": "Direccional (ecografía)",

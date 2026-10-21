@@ -202,6 +202,16 @@ const moreTools = [
           commands: setToolActiveToolbar,
           evaluate: 'evaluate.cornerstoneTool',
         }),
+        // fpacs (2026-10-21): distancia TA-GT de rodilla. Cuatro clics: dos en la cara posterior de
+        // los cóndilos, el vértice de la tróclea y el centro de la tuberosidad tibial. Tool TaGt.
+        createButton({
+          id: 'TaGt',
+          icon: 'tool-tagt',
+          label: 'TA-GT Distance',
+          tooltip: 'TA-GT: posterior condylar line, trochlear groove and tibial tuberosity',
+          commands: setToolActiveToolbar,
+          evaluate: 'evaluate.cornerstoneTool',
+        }),
         createButton({
           id: 'Magnify',
           icon: 'tool-magnify',

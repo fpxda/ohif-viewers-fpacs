@@ -104,6 +104,7 @@ import { ReactComponent as toolCircle } from './../../assets/icons/tool-circle.s
 import { ReactComponent as toolLength } from './../../assets/icons/tool-length.svg';
 import { ReactComponent as toolLine } from './../../assets/icons/tool-line.svg';
 import { ReactComponent as toolSuperimpose } from './../../assets/icons/tool-superimpose.svg';
+import { ReactComponent as toolTaGt } from './../../assets/icons/tool-tagt.svg';
 import { ReactComponent as toolStackScroll } from './../../assets/icons/tool-stack-scroll.svg';
 import { ReactComponent as toolMagnify } from './../../assets/icons/tool-quick-magnify.svg';
 import { ReactComponent as toolFlipHorizontal } from './../../assets/icons/tool-flip-horizontal.svg';
@@ -303,6 +304,7 @@ const ICONS = {
   'tool-length': toolLength,
   'tool-line': toolLine,
   'tool-superimpose': toolSuperimpose,
+  'tool-tagt': toolTaGt,
   'tool-stack-scroll': toolStackScroll,
   'tool-magnify': toolMagnify,
   'tool-flip-horizontal': toolFlipHorizontal,
