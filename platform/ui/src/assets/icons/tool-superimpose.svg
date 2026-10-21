@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tool-superimpose</title>
+    <g id="tool-superimpose" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" x="0" y="0" width="28" height="28"></rect>
+        <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="9" width="14" height="14" rx="1.5"></rect>
+            <path d="M9,9 L9,6.5 C9,5.67 9.67,5 10.5,5 L21.5,5 C22.33,5 23,5.67 23,6.5 L23,17.5 C23,18.33 22.33,19 21.5,19 L19,19" stroke-dasharray="2.5 2"></path>
+        </g>
+    </g>
+</svg>

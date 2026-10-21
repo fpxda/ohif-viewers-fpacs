@@ -41,6 +41,7 @@ import {
 import CalibrationLineTool from './tools/CalibrationLineTool';
 import ImageOverlayViewerTool from './tools/ImageOverlayViewerTool';
 import PlainLineTool from './tools/PlainLineTool';
+import SliceSuperimposeTool from './tools/SliceSuperimposeTool';
 
 export default function initCornerstoneTools(configuration = {}) {
   CrosshairsTool.isAnnotation = false;
@@ -76,6 +77,7 @@ export default function initCornerstoneTools(configuration = {}) {
   addTool(ReferenceLinesTool);
   addTool(CalibrationLineTool);
   addTool(PlainLineTool); // fpacs: línea recta sin medida visible
+  addTool(SliceSuperimposeTool); // fpacs: corte fijo translúcido sobre el actual (anteversión femoral)
   addTool(TrackballRotateTool);
   addTool(ImageOverlayViewerTool);
   addTool(AdvancedMagnifyTool);
@@ -127,6 +129,7 @@ const toolNames = {
   ReferenceLines: ReferenceLinesTool.toolName,
   CalibrationLine: CalibrationLineTool.toolName,
   PlainLine: PlainLineTool.toolName,
+  SliceSuperimpose: SliceSuperimposeTool.toolName,
   TrackballRotateTool: TrackballRotateTool.toolName,
   CircleScissors: CircleScissorsTool.toolName,
   RectangleScissors: RectangleScissorsTool.toolName,

@@ -125,6 +125,23 @@ const moreTools = [
             },
           ],
         }),
+        // fpacs (2026-10-21): fija el corte actual y lo muestra translúcido sobre los demás, para
+        // medir anteversión femoral (cuello + cóndilos en una imagen, con Ángulo de Cobb).
+        // Tool propia SliceSuperimpose; el comando fija/quita (commandsModule).
+        createButton({
+          id: 'SliceSuperimpose',
+          icon: 'tool-superimpose',
+          label: 'Superimpose Slice',
+          tooltip: 'Fix the current slice and show it over the others',
+          commands: 'fpacsToggleSliceSuperimpose',
+          evaluate: [
+            'evaluate.cornerstoneTool.toggle',
+            {
+              name: 'evaluate.viewport.supported',
+              unsupportedViewportTypes: ['video'],
+            },
+          ],
+        }),
         createButton({
           id: 'StackScroll',
           icon: 'tool-stack-scroll',

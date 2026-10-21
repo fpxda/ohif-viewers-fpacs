@@ -27,6 +27,7 @@ import CornerstoneViewportDownloadForm from './utils/CornerstoneViewportDownload
 import toggleImageSliceSync from './utils/imageSliceSync/toggleImageSliceSync';
 import { getFirstAnnotationSelected } from './utils/measurementServiceMappings/utils/selection';
 import getActiveViewportEnabledElement from './utils/getActiveViewportEnabledElement';
+import SliceSuperimposeTool from './tools/SliceSuperimposeTool';
 import toggleVOISliceSync from './utils/toggleVOISliceSync';
 import { usePositionPresentationStore, useSegmentationPresentationStore } from './stores';
 
@@ -366,6 +367,46 @@ function commandsModule({
       const toolIsEnabled = toolGroup.getToolOptions(toolName).mode === Enums.ToolModes.Enabled;
 
       toolIsEnabled ? toolGroup.setToolDisabled(toolName) : toolGroup.setToolEnabled(toolName);
+    },
+    /**
+     * fpacs: botón "Superponer corte" (anteversión femoral). Primer toque: fija el corte que está
+     * en pantalla y habilita SliceSuperimposeTool, que lo dibuja translúcido sobre cualquier otro
+     * corte. Segundo toque: quita la superposición. Solo en viewports de stack (en MPR/3D avisa).
+     * Ver tools/SliceSuperimposeTool.tsx.
+     */
+    fpacsToggleSliceSuperimpose: () => {
+      const enabledElement = _getActiveViewportEnabledElement();
+      if (!enabledElement) {
+        return;
+      }
+      const { viewport } = enabledElement;
+      const toolGroup = toolGroupService.getToolGroupForViewport(viewport.id);
+      const toolName = SliceSuperimposeTool.toolName;
+      if (!toolGroup || !toolGroup.hasTool(toolName)) {
+        return;
+      }
+      const isOn = toolGroup.getToolOptions(toolName).mode === Enums.ToolModes.Enabled;
+      if (isOn) {
+        SliceSuperimposeTool.clearFixedImage();
+        toolGroup.setToolDisabled(toolName);
+      } else {
+        if (viewport instanceof BaseVolumeViewport || typeof viewport.getCurrentImageId !== 'function') {
+          uiNotificationService.show({
+            title: 'Superponer corte',
+            message: 'Solo funciona sobre cortes de la serie original (no en MPR ni 3D).',
+            type: 'info',
+            duration: 4000,
+          });
+          return;
+        }
+        const imageId = viewport.getCurrentImageId();
+        if (!imageId) {
+          return;
+        }
+        SliceSuperimposeTool.setFixedImage(imageId);
+        toolGroup.setToolEnabled(toolName);
+      }
+      cornerstoneViewportService.getRenderingEngine().render();
     },
     toggleActiveDisabledToolbar({ value, itemId, toolGroupId }) {
       const toolName = itemId || value;
@@ -1266,6 +1307,9 @@ function commandsModule({
     },
     setToolEnabled: {
       commandFn: actions.setToolEnabled,
+    },
+    fpacsToggleSliceSuperimpose: {
+      commandFn: actions.fpacsToggleSliceSuperimpose,
     },
     rotateViewportCW: {
       commandFn: actions.rotateViewport,

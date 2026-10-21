@@ -105,6 +105,8 @@ function initDefaultToolGroup(
       {
         toolName: toolNames.AdvancedMagnify,
       },
+      // fpacs: corte fijo translúcido; la habilita el comando fpacsToggleSliceSuperimpose
+      { toolName: toolNames.SliceSuperimpose },
     ],
   };
 

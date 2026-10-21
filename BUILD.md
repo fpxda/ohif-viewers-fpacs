@@ -87,3 +87,12 @@ componente.
   "Más herramientas").
 - Ícono nuevo `tool-line` (`platform/ui/src/assets/icons/tool-line.svg`,
   registrado en `getIcon.js`).
+- `extensions/cornerstone/src/tools/SliceSuperimposeTool.tsx` — **Superponer corte**
+  (2026-10-21, anteversión femoral): el comando `fpacsToggleSliceSuperimpose`
+  (`commandsModule.ts`) fija el corte en pantalla y habilita la tool, que lo dibuja
+  translúcido (0,5) como `<image>` en la capa SVG de anotaciones, con la geometría
+  DICOM del corte fijo proyectada a canvas (zoom/pan/rotación/volteo) y la W/L del
+  viewport. Registrada en `initCornerstoneTools`, en el toolgroup `default` como
+  `disabled`, botón en "Más herramientas" (`moreTools.ts`), ícono `tool-superimpose`.
+  El "Image Overlay" original (planos 60xx del equipo) se retradujo a
+  "Overlay DICOM del equipo" para que no se confunda con esto.
