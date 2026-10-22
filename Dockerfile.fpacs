@@ -1,6 +1,6 @@
 # fpacs-ohif — imagen custom con PUBLIC_URL=/ohif/ + mobile CSS overrides.
 # Build context = ./ (con Viewers/dist/ ya construido).
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine   # 1.30.x estable con soporte (CVE nginx 2026-10-14); antes 1.27
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx-fpacs.conf /etc/nginx/conf.d/default.conf
 COPY platform/app/dist /usr/share/nginx/html
