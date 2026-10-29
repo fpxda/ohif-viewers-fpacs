@@ -26,7 +26,8 @@ sudo docker run --rm -v "$PWD":/app -w /app \
                     yarn install --frozen-lockfile && yarn build"
 
 # 3) Empaquetar el dist en la imagen nginx (tag NUEVO, nunca pisar el anterior)
-sudo docker build -f Dockerfile.fpacs -t dockerxda/fpacs-ohif:<TAG-NUEVO> .
+# --pull: que la base nginx sea la última publicada, no la del caché de esta máquina (§7 del CLAUDE global)
+sudo docker build --pull -f Dockerfile.fpacs -t dockerxda/fpacs-ohif:<TAG-NUEVO> .
 ```
 
 ## GOTCHAS (aprendidos a los golpes — no borrar)
@@ -39,6 +40,8 @@ sudo docker build -f Dockerfile.fpacs -t dockerxda/fpacs-ohif:<TAG-NUEVO> .
   `PUBLIC_URL`, Nx restaura el build viejo (con el PUBLIC_URL anterior) y encima el
   artifact de otro container falla el integrity check (exit 1). Por eso:
   `NX_SKIP_NX_CACHE=true` + `rm -rf node_modules/.cache/nx .nx` antes de cada build.
+- **Sin comentarios al final de una instrucción en `Dockerfile.fpacs`**: `FROM nginx:1.30-alpine  # …`
+  hace fallar el build ("FROM requires either one or three arguments"); el comentario va en su línea (visto 29/10).
 - **Node 20** (no 22): la era 3.9.0 se buildea con node 18/20; node 22 puede romper
   node-gyp de deps viejas. Yarn 1.22.22 (via corepack).
 - El baseline (sin cambios) reproduce la imagen desplegada EXACTO — verificá corriendo
@@ -104,3 +107,10 @@ componente.
   entre los pies de las perpendiculares, en mm de mundo). Botón en "Más herramientas",
   pasiva en el toolgroup `default`, ícono `tool-tagt`. No está mapeada al panel de
   mediciones: el valor se lee sobre la imagen. Se usa con "Superponer corte".
+- **Zoom con dos dedos (pinch)** (2026-10-29, `es5`): `{ numTouchPoints: 2 }` sumado al binding
+  de Zoom en los cuatro toolgroups de `modes/longitudinal/src/initToolGroups.js` (default, SR,
+  mpr, volume3d). Cornerstone solo entrega un gesto de N dedos a la tool que tenga ese binding;
+  OHIF 3.9 no lo trae, y como el `app-config.js` de fpacs pone `touch-action: none` en el
+  viewport (sin pinch nativo del navegador desde el 02/09), dos dedos no hacían nada. `ZoomTool`
+  ya viene con `pinchToZoom` y `pan`: separar/juntar hace zoom, mover a la par desplaza. Un dedo
+  sigue siendo Ventana/Nivel. Juez: `fpacs/ops/sonda-pinch-zoom.mjs` (falla contra `es4`, pasa con `es5`).

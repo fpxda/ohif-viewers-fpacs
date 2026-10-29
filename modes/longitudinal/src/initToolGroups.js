@@ -37,7 +37,10 @@ function initDefaultToolGroup(
       },
       {
         toolName: toolNames.Zoom,
-        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }],
+        // fpacs (2026-10-29): dos dedos = zoom (y pan) de la imagen. Cornerstone solo entrega un
+        // gesto de N dedos a la tool que tenga `numTouchPoints: N`; sin esto el pinch no hacía nada
+        // desde que el app-config puso `touch-action: none` en el viewport (02/09).
+        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }, { numTouchPoints: 2 }],
       },
       {
         toolName: toolNames.StackScroll,
@@ -149,10 +152,14 @@ function initSRToolGroup(extensionManager, toolGroupService) {
       },
       {
         toolName: toolNames.Zoom,
+        // fpacs (2026-10-29): dos dedos = zoom (y pan) de la imagen. Cornerstone solo entrega un
+        // gesto de N dedos a la tool que tenga `numTouchPoints: N`; sin esto el pinch no hacía nada
+        // desde que el app-config puso `touch-action: none` en el viewport (02/09).
         bindings: [
           {
             mouseButton: Enums.MouseBindings.Secondary,
           },
+          { numTouchPoints: 2 },
         ],
       },
       {
@@ -204,7 +211,10 @@ function initMPRToolGroup(extensionManager, toolGroupService, commandsManager, m
       },
       {
         toolName: toolNames.Zoom,
-        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }],
+        // fpacs (2026-10-29): dos dedos = zoom (y pan) de la imagen. Cornerstone solo entrega un
+        // gesto de N dedos a la tool que tenga `numTouchPoints: N`; sin esto el pinch no hacía nada
+        // desde que el app-config puso `touch-action: none` en el viewport (02/09).
+        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }, { numTouchPoints: 2 }],
       },
       {
         toolName: toolNames.StackScroll,
@@ -311,7 +321,10 @@ function initVolume3DToolGroup(extensionManager, toolGroupService) {
       },
       {
         toolName: toolNames.Zoom,
-        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }],
+        // fpacs (2026-10-29): dos dedos = zoom (y pan) de la imagen. Cornerstone solo entrega un
+        // gesto de N dedos a la tool que tenga `numTouchPoints: N`; sin esto el pinch no hacía nada
+        // desde que el app-config puso `touch-action: none` en el viewport (02/09).
+        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }, { numTouchPoints: 2 }],
       },
       {
         toolName: toolNames.Pan,
